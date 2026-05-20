@@ -1,5 +1,10 @@
 import Image from "next/image";
-import FeedHeader from "./feedHeader";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { FaRegComment } from "react-icons/fa";
+import { BiRepost } from "react-icons/bi";
+
+import { CiBookmark } from "react-icons/ci";
+import LikeButton from "../like-button";
 
 export default function FeedItem({
   author,
@@ -13,9 +18,12 @@ export default function FeedItem({
   }
   return (
     /* card */
-    <div className="m-4">
-      <div className="p-4">
-        <div>
+    <div className="m-4 border rounded-xl border-neutral-800 relative">
+      <div className="absolute right-4 top-2">
+        <BiDotsHorizontalRounded className="text-2xl text-[#64748B]" />
+      </div>
+      <div className="p-4 grid grid-cols-[60px_1fr]">
+        <div className="">
           <Image
             src={profileimage}
             alt="User avatar"
@@ -25,27 +33,37 @@ export default function FeedItem({
           />
         </div>
         <div>
-          <div>
-            <h1>{author}</h1>
-            <p>@{author} .</p>
+          <div className="flex items-center text-center gap-x-2">
+            <h1 className="font-bold">{author}</h1>
+            <p className="text-[#64748B] text-[12px] ">
+              @{author} . {created_at}
+            </p>
           </div>
-          <div>
+          <div className="py-3 w-[75%]">
             <p>{content}</p>
           </div>
-          <div>
+          <div className="">
             <Image
               src={postimage}
               alt="User avatar"
               width={900}
               height={900}
-              className="w-full border-md object-cover"
+              className="w-full h-36 border-md object-cover rounded-xl"
             />
           </div>
-          <div className="flex gap-6">
-            <button>c</button>
-            <button>c</button>
-            <button>c</button>
-            <button>c</button>
+          <div className="grid grid-cols-4 items-center text-center pt-3 w-[90%] text-[#64748B]">
+            <div className="flex gap-1 items-center">
+              <FaRegComment /> <p className="text-sm">12</p>
+            </div>
+            <div className="flex gap-1 items-center">
+              <BiRepost className="w-6 h-6" /> <p className="text-sm">12</p>
+            </div>
+
+            <LikeButton />
+
+            <div className="">
+              <CiBookmark className="w-6 h-5" />
+            </div>
           </div>
         </div>
       </div>
