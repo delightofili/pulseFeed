@@ -10,10 +10,10 @@ import { IoCreateOutline } from "react-icons/io5";
 
 export default function SideBar() {
   return (
-    <aside className="sticky top-0 h-screen w-32 md:w-64 flex flex-col items-center xl:items-start p-2 xl:pr-4  border-r border-neutral-800">
+    <aside className="sticky top-0 h-screen sm:w-32 xl:w-64 flex flex-col items-center xl:items-start p-2 xl:pr-4  border-r border-neutral-800">
       <div className="p-3 font-bold block md:flex gap-2 items-center">
         <PiPulseBold className=" h-9 w-9 md:h-7 md:w-7  text-[#4F7CFF]" />
-        <h1 className="text-2xl text-white hidden md:block">PulseFeed</h1>
+        <h1 className="text-2xl text-white hidden xl:block">PulseFeed</h1>
       </div>
 
       <nav className="flex flex-col gap-y-2 w-full mt-4 items-center ">
@@ -63,7 +63,7 @@ export default function SideBar() {
           <span className="hidden xl:inline font-medium">Bookmarks</span>
         </Link>
         <Link
-          href="#"
+          href="/omo"
           className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">

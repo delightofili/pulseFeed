@@ -1,6 +1,6 @@
 export default function TrendingSection() {
   return (
-    <aside className="hidden xl:block sticky top-0 h-screen p-4 w-[350px]">
+    <aside className="hidden lg:block sticky top-0 h-screen p-4 lg:w-85 xl:w-87.5">
       <div className="bg-neutral-900 rounded-2xl p-4 border border-neutral-800">
         <h2 className="font-bold text-xl mb-3">Whats happening</h2>
         <div className="space-y-4">
