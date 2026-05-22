@@ -1,34 +1,42 @@
+import { getFeed } from "@/lib/db";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 
 import { CiBookmark } from "react-icons/ci";
-import LikeButton from "../like-button";
+import LikeButton from "../../../../components/like-button";
+import FeedHeader from "@/components/feeds/feedHeader";
+import FeedModal from "@/components/feed/feed-modal";
 import Link from "next/link";
 
-export default function FeedItem({
-  author,
-  content,
-  profileimage,
-  postimage,
-  created_at,
-  slug,
-}) {
-  if (!postimage) {
-    return null;
+export default async function SingleFeedPage({ params }) {
+  const { slug } = await params;
+
+  const Feed = getFeed(slug);
+
+  // const feed = getFeed(params.slug)
+
+  if (!Feed) {
+    notFound();
   }
+
   return (
-    /* card */
-    <Link href={`/post/${slug}`}>
-      <div className="m-4 border rounded-xl border-neutral-800 relative">
+    <>
+      <FeedHeader />
+      <Link
+        href={"/"}
+        className="fixed w-screen h-screen z-20 flex items-center justify-center  backdrop-blur-md p-4 cursor-pointer"
+      />
+      <div className="m-4 border rounded-xl border-neutral-800 relative z-30">
         <div className="absolute right-4 top-2">
           <BiDotsHorizontalRounded className="text-2xl text-[#64748B]" />
         </div>
         <div className="p-4 grid grid-cols-[60px_1fr]">
           <div className="">
             <Image
-              src={profileimage}
+              src={Feed.profileimage}
               alt="User avatar"
               width={40} // 40px matches Tailwind's w-10
               height={40} // 40px matches Tailwind's h-10
@@ -37,21 +45,21 @@ export default function FeedItem({
           </div>
           <div>
             <div className="flex items-center text-center gap-x-2">
-              <h1 className="font-bold">{author}</h1>
+              <h1 className="font-bold">{Feed.author}</h1>
               <p className="text-[#64748B] text-[12px] ">
-                @{author} . {created_at}
+                @{Feed.author} . {Feed.created_at}
               </p>
             </div>
             <div className="py-3 w-[75%]">
-              <p>{content}</p>
+              <p>{Feed.content}</p>
             </div>
             <div className="">
               <Image
-                src={postimage}
+                src={Feed.postimage}
                 alt="User avatar"
                 width={900}
                 height={900}
-                className="w-full h-36 border-md object-cover rounded-xl"
+                className="w-full  border-md object-cover rounded-xl"
               />
             </div>
             <div className="grid grid-cols-4 items-center text-center pt-3 w-[90%] text-[#64748B]">
@@ -68,9 +76,18 @@ export default function FeedItem({
                 <CiBookmark className="w-6 h-5" />
               </div>
             </div>
+            <div className=" flex flex-col">
+              <p className="text-2xl text-white">Comentsssss section</p>
+              <p className="text-2xl text-white">Comentsssss section</p>
+              <p className="text-2xl text-white">Comentsssss section</p>
+              <p className="text-2xl text-white">Comentsssss section</p>
+              <p className="text-2xl text-white">Comentsssss section</p>
+              <p className="text-2xl text-white">Comentsssss section</p>
+              <p className="text-2xl text-white">Comentsssss section</p>
+            </div>
           </div>
         </div>
       </div>
-    </Link>
+    </>
   );
 }

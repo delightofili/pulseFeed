@@ -1,4 +1,3 @@
-import Feeds from "./feed";
 import FeedItem from "./feed-item";
 import FeedHeader from "./feedHeader";
 

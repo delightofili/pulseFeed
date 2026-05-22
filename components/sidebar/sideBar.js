@@ -18,7 +18,7 @@ export default function SideBar() {
 
       <nav className="flex flex-col gap-y-2 w-full mt-4 items-center ">
         <Link
-          href="#"
+          href="/"
           className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition active:text-[#4F7CFF]"
         >
           <span className="text-xl">
@@ -27,7 +27,7 @@ export default function SideBar() {
           <span className="hidden xl:inline font-medium">Home</span>
         </Link>
         <Link
-          href="#"
+          href="/test/explore"
           className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
@@ -36,7 +36,7 @@ export default function SideBar() {
           <span className="hidden xl:inline font-medium">Explore</span>
         </Link>
         <Link
-          href="#"
+          href="/test/feed"
           className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">

@@ -1,4 +1,3 @@
-import FeedHeader from "./feedHeader";
 import FeedPosts from "./feedPosts";
 
 export default function Feeds() {
