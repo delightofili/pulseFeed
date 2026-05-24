@@ -8,7 +8,7 @@ import { CiBookmark } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
 import { IoCreateOutline } from "react-icons/io5";
 
-export default function SideBar() {
+export default async function SideBar({ user }) {
   return (
     <aside className="sticky top-0 h-screen sm:w-32 xl:w-64 flex flex-col items-center xl:items-start p-2 xl:pr-4  border-r border-neutral-800">
       <div className="p-3 font-bold block md:flex gap-2 items-center">
@@ -80,6 +80,9 @@ export default function SideBar() {
           </span>
           <span className="hidden xl:inline font-medium">+ Create Post</span>
         </Link>
+        <div>
+          <p className="text-white">Welcome, {user.name}</p>
+        </div>
       </nav>
     </aside>
   );
