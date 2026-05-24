@@ -13,6 +13,7 @@ export default function FeedItem({
   profileimage,
   postimage,
   created_at,
+  likes,
   slug,
 }) {
   if (!postimage) {
@@ -63,7 +64,7 @@ export default function FeedItem({
                 <BiRepost className="w-6 h-6" /> <p className="text-sm">12</p>
               </div>
 
-              <LikeButton />
+              <LikeButton slug={slug} initialLikes={likes} />
 
               <div className="">
                 <CiBookmark className="w-6 h-5" />

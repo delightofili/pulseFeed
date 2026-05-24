@@ -1,8 +1,13 @@
 //import Image from "next/image";
 
+"use client";
+
+import { createFeed } from "@/app/actions";
 import NavLink from "../ui/nav-link";
+import { useActionState } from "react";
 
 export default function AddPost() {
+  const [state, formAction, isPending] = useActionState(createFeed, null);
   return (
     <div>
       <div className="m-4 border rounded-xl bg-[#212f5b75] border-neutral-800 relative">
@@ -16,9 +21,20 @@ export default function AddPost() {
               className="w-10 h-10 rounded-full object-cover bg-green-200"
             />
           </div>
-          <div>
+          <form action={formAction}>
             <div className="flex items-center text-center gap-x-2">
-              <input type="text" placeholder="What's happening?" />
+              <input name="author" type="text" placeholder="your name?" />
+            </div>
+            <div className="flex items-center text-center gap-x-2">
+              <textarea name="content" placeholder="What's happening?" />
+            </div>
+            <div className="flex items-center text-center gap-x-2">
+              {state?.error && (
+                <p className="text-red-500 text-sm">{state.error}</p>
+              )}
+              {state?.success && (
+                <p className="text-green-500 text-sm">Posted!</p>
+              )}
             </div>
             <div className="flex justify-between p-4">
               <div className="grid grid-cols-4 items-center text-center pt-3 w-[90%] text-[#64748B]">
@@ -29,9 +45,11 @@ export default function AddPost() {
                   <p className="text-sm">GIF</p>
                 </div>
               </div>
-              <button className="bg-blue-500 text-white p-2">Post</button>
+              <button type="submit" className="bg-blue-500 text-white p-2">
+                {isPending ? "Posting..." : " Post"}
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <div className="flex p-2 ml-10 gap-6 text-[12px] font-bold">

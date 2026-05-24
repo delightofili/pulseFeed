@@ -1,10 +1,12 @@
 "use client";
 
+import { likePost } from "@/app/actions";
+
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
 
-export default function LikeButton() {
-  const [likes, setLikes] = useState(12);
+export default function LikeButton({ slug, initialLikes }) {
+  const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
 
   function handleLikeChange() {
@@ -16,14 +18,19 @@ export default function LikeButton() {
       setIsLiked(true);
     }
   }
+
   return (
-    <div className="flex gap-1 items-center">
-      <button onClick={handleLikeChange}>
+    <form
+      action={likePost}
+      className="flex gap-1 items-center"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button value={slug} type="submit" name="slug" onClick={handleLikeChange}>
         <FaHeart className={`w-5 h-5 ${isLiked ? "text-pink-700" : ""}`} />{" "}
       </button>
       <p className={`text-sm w-5 h-5 ${isLiked ? "text-pink-700" : ""}`}>
         {likes}
       </p>
-    </div>
+    </form>
   );
 }
