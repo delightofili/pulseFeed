@@ -8,7 +8,7 @@ import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import LikeButton from "../../../../components/like-button";
 import FeedHeader from "@/components/feeds/feedHeader";
-import FeedModal from "@/components/feed/feed-modal";
+
 import Link from "next/link";
 
 export default async function SingleFeedPage({ params }) {
@@ -25,6 +25,7 @@ export default async function SingleFeedPage({ params }) {
   return (
     <>
       <FeedHeader />
+
       <Link
         href={"/"}
         className="fixed w-screen h-screen z-20 flex items-center justify-center  backdrop-blur-md p-4 cursor-pointer"

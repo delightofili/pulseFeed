@@ -27,7 +27,7 @@ export default function SideBar() {
           <span className="hidden xl:inline font-medium">Home</span>
         </Link>
         <Link
-          href="/test/explore"
+          href="/explore"
           className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">

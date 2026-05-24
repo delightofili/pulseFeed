@@ -18,6 +18,7 @@ export default function FeedItem({
   if (!postimage) {
     return null;
   }
+
   return (
     /* card */
     <Link href={`/post/${slug}`}>
