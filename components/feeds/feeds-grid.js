@@ -1,8 +1,13 @@
-import AddPost from "./add-post";
 import FeedItem from "./feed-item";
-import FeedHeader from "./feedHeader";
 
 export default function FeedsGrid({ feeds }) {
+  if (!feeds || feeds.length === 0) {
+    return (
+      <p className="text-neutral-500 text-center p-8">
+        No posts yet. Be the first to post.
+      </p>
+    );
+  }
   return (
     <>
       <ul className="grid grid-rows-1">

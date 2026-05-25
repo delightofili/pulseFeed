@@ -32,7 +32,7 @@ export async function createFeed(prevState, formData) {
 }
 
 export async function likePost(formData) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const postId = formData.get("postId");
   const result = likePostDb(user.id, postId);
 
@@ -45,7 +45,7 @@ export async function likePost(formData) {
 //add comments\\\\
 
 export async function addComment(prevState, formData) {
-  const user = getCurrentUser();
+  const user = await getCurrentUser();
   const postId = formData.get("postId");
   const content = formData.get("content");
 
@@ -101,9 +101,7 @@ export async function login(prevState, formData) {
   const password = formData.get("password");
 
   if (!email || !password) {
-    {
-      error: "All fields are required";
-    }
+    return { error: "All fields are required" };
   }
 
   const user = getUserByEmail(email);

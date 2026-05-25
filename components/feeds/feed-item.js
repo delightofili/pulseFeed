@@ -1,4 +1,3 @@
-// components/feeds/FeedItem.js
 import Image from "next/image";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
@@ -31,6 +30,7 @@ export default function FeedItem({
                 alt={name}
                 width={40}
                 height={40}
+                priority
                 className="w-10 h-10 rounded-full object-cover"
               />
             ) : (
@@ -55,6 +55,7 @@ export default function FeedItem({
                 alt="post image"
                 width={900}
                 height={900}
+                priority
                 className="w-full h-36 object-cover rounded-xl"
               />
             )}

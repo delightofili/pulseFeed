@@ -9,11 +9,13 @@ export const metadata = {
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-jakarta",
+  preload: true,
 });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={jakarta.variable}>
       <body
         className={`bg-[#071029] text-neutral-100 min-h-screen ${jakarta.className}`}
       >

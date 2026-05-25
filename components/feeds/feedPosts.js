@@ -1,7 +1,7 @@
-import { getPosts } from "@/lib/db";
 import FeedsGrid from "./feeds-grid";
+import { getCachedPosts } from "@/lib/queries";
 
-export default async function FeedPosts() {
-  const posts = getPosts();
-  return <FeedsGrid feeds={posts} />;
+export default async function FeedPosts({ tab }) {
+  const posts = await getCachedPosts();
+  return <FeedsGrid feeds={posts} tab={tab} />;
 }
