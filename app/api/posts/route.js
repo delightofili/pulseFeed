@@ -1,24 +1,18 @@
-import { addFeed, getFeeds } from "@/lib/db";
+import { getPosts } from "@/lib/db";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+
+import AddPost from "@/components/feeds/add-post";
 
 export async function GET() {
-  /* const cookieStore = await cookies();
-  const session = cookieStore.get("session");
-
-  if (!session) {
-    return NextResponse.json({ error: "Not Logged In" }, { status: 401 });
-  } */
-
-  const posts = getFeeds();
+  const posts = getPosts();
 
   return NextResponse.json(posts);
 }
 
 export async function POST(req) {
   const body = await req.json();
-  const { content, author } = body;
-  const feed = addFeed({ content, author });
+  const { content, user } = body;
+  const feed = AddPost({ content, user });
 
   return NextResponse.json(feed);
 }

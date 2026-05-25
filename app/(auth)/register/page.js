@@ -20,6 +20,12 @@ export default function RegisterPage() {
           className="bg-neutral-800 text-white p-3 rounded-lg"
         />
         <input
+          name="username"
+          type="username"
+          placeholder="User name"
+          className="bg-neutral-800 text-white p-3 rounded-lg"
+        />
+        <input
           name="email"
           type="email"
           placeholder="Email"

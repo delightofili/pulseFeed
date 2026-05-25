@@ -3,33 +3,57 @@
 import {
   createSession,
   deleteSession,
+  getCurrentUser,
   hashPassword,
   setSessionCookie,
   verifyPassword,
 } from "@/lib/auth";
-import { addFeed, createUser, getUserByEmail, likeFeed } from "@/lib/db";
+import {
+  createComment,
+  createPost,
+  createUser,
+  getUserByEmail,
+  likePostDb,
+} from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createFeed(prevState, formData) {
+  const user = await getCurrentUser();
   const content = formData.get("content");
-  const author = formData.get("author");
 
-  if (!content || !author) return;
+  if (!content) return { error: "Content cannot be empty" };
 
-  addFeed({ content, author });
+  createPost({ userId: user.id, content });
 
-  console.log("Umm...FEED CREATED");
   revalidatePath("/");
 
   return { success: true };
 }
 
 export async function likePost(formData) {
-  const slug = formData.get("slug");
-  likeFeed(slug);
+  const user = getCurrentUser();
+  const postId = formData.get("postId");
+  const result = likePostDb(user.id, postId);
+
   console.log("post liked! ❤️❤️❤️❤️");
   revalidatePath("/");
+
+  return result;
+}
+
+//add comments\\\\
+
+export async function addComment(prevState, formData) {
+  const user = getCurrentUser();
+  const postId = formData.get("postId");
+  const content = formData.get("content");
+
+  if (!content) return { error: "Comment cannot be empty!" };
+
+  createComment({ userId: user.id, postId, content });
+  revalidatePath(`/post/${postId}`);
+  return { success: true };
 }
 
 //register and login server actions
@@ -38,10 +62,11 @@ export async function register(prevState, formData) {
   const name = formData.get("name");
   const email = formData.get("email");
   const password = formData.get("password");
+  const userName = formData.get("username");
 
   //validation
 
-  if (!name || !email || !password) {
+  if (!name || !userName || !email || !password) {
     return { error: "All fields are required!" };
   }
 
@@ -60,7 +85,7 @@ export async function register(prevState, formData) {
   //hash password and create user
 
   const hashedPassword = await hashPassword(password);
-  createUser({ name, email, password: hashedPassword });
+  createUser({ name, username: userName, email, password: hashedPassword });
 
   //get the new user and create session
 

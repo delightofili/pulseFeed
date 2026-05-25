@@ -1,14 +1,18 @@
+// components/feeds/FeedHeader.js
 import { MdOutlineLightMode } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 
 export default function FeedHeader() {
   return (
-    <header className="p-4 flex items-center justify-between text-center sticky top-0 bg-[#071029] z-30">
-      <h1 className="text-2xl text-white">Home</h1>
-      <div className="flex gap-3">
-        <MdOutlineLightMode className="w-6 h-6 text-white" />
-
-        <CgProfile className=" w-6 h-6 text-white" />
+    <header className="px-4 py-3 flex items-center justify-between sticky top-0 bg-[#071029]/90 backdrop-blur-md z-30 border-b border-neutral-800">
+      <h1 className="text-xl font-bold text-white">Home</h1>
+      <div className="flex gap-3 items-center">
+        <button className="p-2 hover:bg-neutral-800 rounded-full transition">
+          <MdOutlineLightMode className="w-5 h-5 text-white" />
+        </button>
+        <button className="p-2 hover:bg-neutral-800 rounded-full transition">
+          <CgProfile className="w-5 h-5 text-white" />
+        </button>
       </div>
     </header>
   );
