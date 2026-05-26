@@ -12,6 +12,42 @@ import LikeButton from "@/components/like-button";
 import FeedHeader from "@/components/feeds/feedHeader";
 import CommentForm from "@/components/feeds/CommentForm";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const post = getPostById(id);
+
+  if (!post) {
+    return { title: "Post not found" };
+  }
+
+  return {
+    title: `${post.name}: "${post.content.slice(0, 50)}..."`,
+    description: post.content.slice(0, 160),
+    openGraph: {
+      title: `${post.name} on PulseFeed`,
+      description: post.content.slice(0, 160),
+      type: "article",
+      authors: [post.name],
+      images: post.image
+        ? [
+            {
+              url: post.image,
+              width: 900,
+              height: 600,
+              alt: `Post by ${post.name}`,
+            },
+          ]
+        : ["/og-image.png"],
+    },
+    twitter: {
+      card: post.image ? "summary_large_image" : "summary",
+      title: `${post.name} on PulseFeed`,
+      description: post.content.slice(0, 160),
+      images: post.image ? [post.image] : ["/og-image.png"],
+    },
+  };
+}
+
 export default async function SinglePostPage({ params }) {
   const { id } = await params;
   const post = getPostById(id);
