@@ -12,16 +12,21 @@ import {
   createComment,
   createPost,
   createUser,
+  deletePostDb,
+  getPostById,
   getUserByEmail,
   likePostDb,
 } from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createFeed(prevState, formData) {
   const user = await getCurrentUser();
   const content = formData.get("content");
 
+  if (!user) {
+    return { error: "you must be logged in to post!" };
+  }
   if (!content) return { error: "Content cannot be empty" };
 
   createPost({ userId: user.id, content });
@@ -36,10 +41,36 @@ export async function likePost(formData) {
   const postId = formData.get("postId");
   const result = likePostDb(user.id, postId);
 
+  if (!user) {
+    return { error: "you must be logged in to like a post" };
+  }
+
   console.log("post liked! ❤️❤️❤️❤️");
   revalidatePath("/");
 
   return result;
+}
+
+export async function deletePost(formData) {
+  const user = await getCurrentUser();
+  const postId = formData.get("postId");
+
+  if (!user) {
+    return { error: "You must be logged in" };
+  }
+
+  const post = getPostById(postId);
+  if (!post) {
+    return { error: "Post not found" };
+  }
+
+  if (post.user_id !== user.id) {
+    return { error: "you can only delete your own post" };
+  }
+
+  deletePostDb(postId);
+  revalidateTag("posts");
+  return { success: true };
 }
 
 //add comments\\\\
@@ -48,6 +79,10 @@ export async function addComment(prevState, formData) {
   const user = await getCurrentUser();
   const postId = formData.get("postId");
   const content = formData.get("content");
+
+  if (!user) {
+    return { error: "you must be logged in to comment on a post" };
+  }
 
   if (!content) return { error: "Comment cannot be empty!" };
 

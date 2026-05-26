@@ -11,6 +11,7 @@ import { CiBookmark } from "react-icons/ci";
 import LikeButton from "@/components/like-button";
 import FeedHeader from "@/components/feeds/feedHeader";
 import CommentForm from "@/components/feeds/CommentForm";
+import { getCachedPost } from "@/lib/queries";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }) {
 
 export default async function SinglePostPage({ params }) {
   const { id } = await params;
-  const post = getPostById(id);
+  const post = getCachedPost(id);
   const user = await getCurrentUser();
 
   if (!post) notFound();
