@@ -51,6 +51,12 @@ export default async function proxy(request) {
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=()",
   );
+  if (process.env.NODE_ENV === "production") {
+    response.headers.set(
+      "Content-Security-Policy",
+      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;",
+    );
+  }
 
   return response;
 }

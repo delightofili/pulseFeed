@@ -10,6 +10,14 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const origin = req.headers.get("origin");
+  const allowedOrigins = [
+    "http://localhost:3000",
+    "https://pulsefeed.vercel.app",
+  ];
+  if (!allowedOrigins.includes(origin)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
   const body = await req.json();
   const { content, user } = body;
   const feed = AddPost({ content, user });
