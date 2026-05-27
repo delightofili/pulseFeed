@@ -64,7 +64,7 @@ export async function likePost(formData) {
   return result;
 }
 
-export async function deletePost(formData) {
+export async function deletePost(prevState, formData) {
   const user = await getCurrentUser();
 
   if (!user) {
@@ -72,7 +72,7 @@ export async function deletePost(formData) {
   }
 
   const postId = formData.get("postId");
-  const post = getPostById(postId);
+  const post = await getPostById(postId);
   if (!post) {
     return { error: "Post not found" };
   }
@@ -84,6 +84,7 @@ export async function deletePost(formData) {
 
   deletePostDb(postId);
   revalidateTag("posts");
+  console.log("post deleted");
   return { success: true };
 }
 

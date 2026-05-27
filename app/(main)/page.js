@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { Suspense } from "react";
 
 export default async function Home({ searchParams }) {
-  const { tab } = await searchParams;
+  const { tab, modal, id } = await searchParams;
 
   const user = await getCurrentUser();
   return (
@@ -15,7 +15,7 @@ export default async function Home({ searchParams }) {
       <FeedHeader />
       <AddPost user={user} />
       <Suspense fallback={<FeedSkeleton />}>
-        <FeedPosts tab={tab} />
+        <FeedPosts tab={tab} currentUserId={user?.id} />
       </Suspense>
     </div>
   );

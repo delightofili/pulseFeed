@@ -1,6 +1,6 @@
 import FeedItem from "./feed-item";
 
-export default function FeedsGrid({ feeds }) {
+export default function FeedsGrid({ feeds, currentUserId }) {
   if (!feeds || feeds.length === 0) {
     return (
       <p className="text-neutral-500 text-center p-8">
@@ -13,7 +13,7 @@ export default function FeedsGrid({ feeds }) {
       <ul className="grid grid-rows-1">
         {feeds.map((feed) => (
           <li key={feed.id}>
-            <FeedItem {...feed} />
+            <FeedItem {...feed} currentUserId={currentUserId} />
           </li>
         ))}
       </ul>

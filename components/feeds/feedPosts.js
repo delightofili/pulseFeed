@@ -1,7 +1,9 @@
+import { getCurrentUser } from "@/lib/auth";
 import FeedsGrid from "./feeds-grid";
 import { getCachedPosts } from "@/lib/queries";
 
-export default async function FeedPosts({ tab }) {
+export default async function FeedPosts({ tab, currentUserId }) {
   const posts = await getCachedPosts();
-  return <FeedsGrid feeds={posts} tab={tab} />;
+
+  return <FeedsGrid feeds={posts} tab={tab} currentUserId={currentUserId} />;
 }

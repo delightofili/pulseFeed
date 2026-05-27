@@ -13,7 +13,7 @@ export default function AddPost({ user }) {
   return (
     <div className="border-b border-neutral-800">
       {/* tabs */}
-      <div className="flex border-b border-neutral-800">
+      <div className="flex border-b border-neutral-800 p-3">
         <NavLink
           className="flex-1 text-center py-3 text-sm font-bold text-white"
           href="?tab=for-you"

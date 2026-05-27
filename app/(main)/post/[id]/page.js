@@ -1,17 +1,18 @@
-// app/(main)/post/[id]/page.js
 import { getPostById, getComments } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth";
 import { notFound } from "next/navigation";
-import { addComment } from "@/app/actions";
+
 import Image from "next/image";
-import Link from "next/link";
+
 import { FaRegComment } from "react-icons/fa";
-import { BiRepost, BiDotsHorizontalRounded } from "react-icons/bi";
+
+import { BiRepost } from "react-icons/bi";
+
 import { CiBookmark } from "react-icons/ci";
 import LikeButton from "@/components/like-button";
-import FeedHeader from "@/components/feeds/feedHeader";
 import CommentForm from "@/components/feeds/CommentForm";
 import { getCachedPost } from "@/lib/queries";
+import PostHeader from "@/components/ui/post-header";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -60,7 +61,7 @@ export default async function SinglePostPage({ params }) {
 
   return (
     <>
-      <FeedHeader />
+      <PostHeader />
       <div className="m-4 border rounded-xl border-neutral-800">
         {/* post header */}
         <div className="p-4 grid grid-cols-[60px_1fr]">

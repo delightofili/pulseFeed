@@ -31,7 +31,7 @@ export default function SideBar({ user }) {
         </Link>
         <Link
           href="/explore"
-          className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
+          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
             <IoSearch />
@@ -40,7 +40,7 @@ export default function SideBar({ user }) {
         </Link>
         <Link
           href="/notifications"
-          className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
+          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
             <IoNotificationsOutline />
@@ -49,7 +49,7 @@ export default function SideBar({ user }) {
         </Link>
         <Link
           href="/messages"
-          className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
+          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
             <TbMessageMinus />
@@ -58,7 +58,7 @@ export default function SideBar({ user }) {
         </Link>
         <Link
           href="/bookmarks"
-          className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
+          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
             <CiBookmark />
@@ -67,7 +67,7 @@ export default function SideBar({ user }) {
         </Link>
         <Link
           href={user ? `/profile/${user.username}` : "/login"}
-          className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 rounded-full w-fit xl:w-full transition"
+          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
             <CgProfile />
@@ -76,7 +76,7 @@ export default function SideBar({ user }) {
         </Link>
         <Link
           href="/"
-          className="flex items-center gap-x-4 p-3 hover:bg-neutral-900 bg-[#4F7CFF] rounded-full w-fit xl:w-full transition"
+          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] bg-[#4F7CFF] rounded-full w-fit xl:w-full transition"
         >
           <span className="text-xl">
             <IoCreateOutline />
