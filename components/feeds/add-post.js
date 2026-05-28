@@ -1,4 +1,3 @@
-// components/feeds/AddPost.js
 "use client";
 
 import { createFeed } from "@/app/actions";
@@ -31,7 +30,7 @@ export default function AddPost({ user }) {
       {/* post composer */}
       <div className="p-4 grid grid-cols-[44px_1fr] gap-3">
         {/* avatar */}
-        <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+        <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-white font-bold text-sm shrink-0">
           {user?.name?.charAt(0).toUpperCase() ?? "?"}
         </div>
 

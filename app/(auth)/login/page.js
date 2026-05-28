@@ -4,6 +4,8 @@ import { login } from "@/app/actions";
 import Link from "next/link";
 import { useActionState } from "react";
 
+export const dynamic = "force-static";
+
 export default function LoginPage() {
   const [state, formAction, isPending] = useActionState(login, null);
   return (

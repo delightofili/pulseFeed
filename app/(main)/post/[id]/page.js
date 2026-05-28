@@ -1,4 +1,4 @@
-import { getPostById, getComments } from "@/lib/db";
+import { getPostById, getComments, getPosts } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth";
 import { notFound } from "next/navigation";
 
@@ -11,7 +11,7 @@ import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import LikeButton from "@/components/like-button";
 import CommentForm from "@/components/feeds/CommentForm";
-import { getCachedPost } from "@/lib/queries";
+import { getCachedComments, getCachedPost } from "@/lib/queries";
 import PostHeader from "@/components/ui/post-header";
 
 export async function generateMetadata({ params }) {
@@ -50,14 +50,22 @@ export async function generateMetadata({ params }) {
   };
 }
 
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const posts = getPosts();
+  return posts.slice(0, 10).map((post) => ({
+    id: String(post.id),
+  }));
+}
 export default async function SinglePostPage({ params }) {
   const { id } = await params;
-  const post = getCachedPost(id);
-  const user = await getCurrentUser();
+  const [post, comments] = await Promise.all([
+    getCachedPost(id),
+    getCachedComments(id),
+  ]);
 
   if (!post) notFound();
-
-  const comments = getComments(id);
 
   return (
     <>

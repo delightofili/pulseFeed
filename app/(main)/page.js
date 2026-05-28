@@ -6,8 +6,9 @@ import FeedPosts from "@/components/feeds/feedPosts";
 import { getCurrentUser } from "@/lib/auth";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
 export default async function Home({ searchParams }) {
-  const { tab, modal, id } = await searchParams;
+  const { tab, id } = await searchParams;
 
   const user = await getCurrentUser();
   return (

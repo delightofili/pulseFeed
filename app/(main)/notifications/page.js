@@ -1,9 +1,16 @@
 import { getCurrentUser } from "@/lib/auth";
-import { getNotifications } from "@/lib/db";
+
+import { getNotifications, markNotificationsRead } from "@/lib/db";
+import { redirect } from "next/navigation";
+export const dynamic = "force-dynamic";
 
 export default async function NotificationsPage() {
   const user = await getCurrentUser();
+
+  if (!user) redirect("/login");
+
   const notifications = getNotifications(user.id);
+
   return (
     <div className="w-full min-h-screen border-r border-neutral-800">
       {/* HEADER SECTION HEADER FILTER CONTROLS */}
@@ -28,28 +35,14 @@ export default async function NotificationsPage() {
         {notifications.map((item) => (
           <div
             key={item.id}
-            className="p-4 flex gap-x-4 hover:bg-neutral-900/20 transition cursor-pointer"
+            className={`p-4 flex gap-x-4 hover:bg-neutral-900/20 transition cursor-pointer ${item.read ? "bg-neutral-900/50" : ""}`}
           >
-            {/* TYPE IDENTIFIER ICON BOUNDARIES */}
-            {/* <span className="text-xl shrink-0 select-none pt-0.5">
-              {item.icon}
-            </span> */}
-
-            {/* CONTAINER META AND ATTACHED CONTENT BLOCKS */}
-            <div className="space-y-1 w-full">
-              <div className="text-sm text-neutral-300">
-                <span className="font-bold text-neutral-100 mr-1">
-                  {item.name} {item.type}d your post
-                </span>
-                {/*  <span className="text-neutral-400 mr-1">{item.username}</span> */}
-                {/*  <span className="text-neutral-400">{item.meta}</span> */}
-              </div>
-
-              {/* POST CARD DATA TARGET SUMMARIES */}
-              <p className="text-sm text-neutral-400 bg-neutral-950/30 border border-neutral-800/40 rounded-xl p-3 mt-2 font-medium max-w-lg leading-relaxed">
-                {/*  {item.body} */}
-              </p>
-            </div>
+            <p className="text-white text-sm">
+              <span className="font-bold">{item.name}</span>
+              {item.type === "like" && " liked your post"}
+              {item.type === "comment" && " commented on your post"}
+              {item.type === "follow" && " followed you"}
+            </p>
           </div>
         ))}
       </div>

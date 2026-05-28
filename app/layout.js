@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/lib/context/theme-context";
 import "./globals.css";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
@@ -67,7 +68,7 @@ export default function RootLayout({ children }) {
       <body
         className={`bg-[#071029] text-neutral-100 min-h-screen ${jakarta.className}`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

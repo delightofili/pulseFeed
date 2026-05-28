@@ -10,6 +10,7 @@ import { TbMessageMinus } from "react-icons/tb";
 import { CiBookmark } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
 import { logout } from "@/app/actions";
+import NotificationIcon from "./notification-icon";
 
 export default function SideBar({ user }) {
   return (
@@ -38,15 +39,7 @@ export default function SideBar({ user }) {
           </span>
           <span className="hidden xl:inline font-medium">Explore</span>
         </Link>
-        <Link
-          href="/notifications"
-          className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
-        >
-          <span className="text-xl">
-            <IoNotificationsOutline />
-          </span>
-          <span className="hidden xl:inline font-medium">Notifications</span>
-        </Link>
+        <NotificationIcon />
         <Link
           href="/messages"
           className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"
@@ -74,6 +67,7 @@ export default function SideBar({ user }) {
           </span>
           <span className="hidden xl:inline font-medium">Profile</span>
         </Link>
+
         <Link
           href="/"
           className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] bg-[#4F7CFF] rounded-full w-fit xl:w-full transition"

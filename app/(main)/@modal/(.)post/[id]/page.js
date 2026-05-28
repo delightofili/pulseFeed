@@ -1,6 +1,7 @@
 import Modal from "@/components/ui/modal";
 import { getCachedPost } from "@/lib/queries";
 
+export const revalidate = 60;
 export default async function PostModal({ params }) {
   const { id } = await params;
   const post = await getCachedPost(id);
