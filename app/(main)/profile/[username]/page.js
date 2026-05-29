@@ -1,4 +1,5 @@
-import { getUserById } from "@/lib/db";
+import LogoutButton from "@/components/ui/logout-button";
+import { getUserById, getUserByUsername } from "@/lib/db";
 
 export async function generateMetadata({ params }) {
   const { username } = await params;
@@ -17,12 +18,13 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function profilePage({ params }) {
+export default async function ProfilePage({ params }) {
   const { username } = await params;
-  const user = getUserById(username);
+  const user = getUserByUsername(username);
   return (
     <div>
       <h1>Profile Page of {user.name}</h1>
+      <LogoutButton />
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from "@/lib/auth";
 import {
   createComment,
+  createNotification,
   createPost,
   createUser,
   deletePostDb,
@@ -58,8 +59,21 @@ export async function likePost(formData) {
     return { error: "you must be logged in to like a post" };
   }
 
+  //create notifications for post owner
+
+  const post = getPostById(postId);
+  if (post && post.user_id !== user.id) {
+    createNotification({
+      userId: post.user_id,
+      actorId: user.id,
+      type: "like",
+      postId: postId,
+    });
+  }
+
   console.log("post liked! ❤️❤️❤️❤️");
-  revalidatePath("/");
+
+  revalidateTag("posts");
 
   return result;
 }
@@ -148,7 +162,7 @@ export async function register(prevState, formData) {
   //hash password and create user
 
   const hashedPassword = await hashPassword(password);
-  createUser({ name, username: userName, email, password: hashedPassword });
+  createUser({ name, username: username, email, password: hashedPassword });
 
   //get the new user and create session
 

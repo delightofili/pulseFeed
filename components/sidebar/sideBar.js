@@ -1,11 +1,7 @@
 import Link from "next/link";
 import { PiPulseBold } from "react-icons/pi";
 import { BiHomeAlt } from "react-icons/bi";
-import {
-  IoSearch,
-  IoNotificationsOutline,
-  IoCreateOutline,
-} from "react-icons/io5";
+import { IoSearch, IoCreateOutline } from "react-icons/io5";
 import { TbMessageMinus } from "react-icons/tb";
 import { CiBookmark } from "react-icons/ci";
 import { CgProfile } from "react-icons/cg";
