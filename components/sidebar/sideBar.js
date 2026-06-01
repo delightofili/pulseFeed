@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { logout } from "@/app/actions";
 import NotificationIcon from "./notification-icon";
 
-export default function SideBar({ user }) {
+export default function SideBar({ user, unreadCount }) {
   return (
     <aside className="sticky top-0 h-screen sm:w-32 xl:w-64 flex flex-col items-center xl:items-start p-2 xl:pr-4 border-r border-neutral-800">
       <div className="p-3 font-bold block md:flex gap-2 items-center">
@@ -35,7 +35,7 @@ export default function SideBar({ user }) {
           </span>
           <span className="hidden xl:inline font-medium">Explore</span>
         </Link>
-        <NotificationIcon />
+        <NotificationIcon initialCount={unreadCount} />
         <Link
           href="/messages"
           className="flex items-center gap-x-4 p-3 hover:bg-[#212f5b75] rounded-full w-fit xl:w-full transition"

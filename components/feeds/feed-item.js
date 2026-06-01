@@ -7,6 +7,8 @@ import LikeButton from "../like-button";
 import Link from "next/link";
 import MenuButton from "../ui/feedItem/menu-button";
 import FeedItemWrapper from "../ui/feedItem/feed-item-wrapper";
+import ProfileLinkText from "./profile-link-text";
+import ProfileLinkAvatar from "./profile-link-avatar";
 
 export default function FeedItem({
   id,
@@ -22,7 +24,7 @@ export default function FeedItem({
 }) {
   return (
     <FeedItemWrapper id={id}>
-      <Link href={`/post/${id}`}>
+      <div>
         <div className="m-4 border rounded-xl border-neutral-800 relative">
           <MenuButton
             postId={id}
@@ -30,42 +32,32 @@ export default function FeedItem({
             postUserId={user_id}
           />
           <div className="p-4 grid grid-cols-[60px_1fr]">
+            <ProfileLinkAvatar
+              avatar={avatar}
+              name={name}
+              username={username}
+            />
             <div>
-              {avatar ? (
-                <Image
-                  src={avatar}
-                  alt={name}
-                  width={40}
-                  height={40}
-                  priority
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-white font-bold">
-                  {name?.charAt(0).toUpperCase()}
+              <ProfileLinkText
+                created_at={created_at}
+                name={name}
+                username={username}
+              />
+              <Link href={`/post/${id}`}>
+                <div className="py-3 w-[75%]">
+                  <p className="text-white">{content}</p>
                 </div>
-              )}
-            </div>
-            <div>
-              <div className="flex items-center gap-x-2">
-                <h1 className="font-bold text-white">{name}</h1>
-                <p className="text-[#64748B] text-[12px]">
-                  @{username} · {created_at}
-                </p>
-              </div>
-              <div className="py-3 w-[75%]">
-                <p className="text-white">{content}</p>
-              </div>
-              {image && (
-                <Image
-                  src={image}
-                  alt="post image"
-                  width={900}
-                  height={900}
-                  priority
-                  className="w-full h-36 object-cover rounded-xl"
-                />
-              )}
+                {image && (
+                  <Image
+                    src={image}
+                    alt="post image"
+                    width={900}
+                    height={900}
+                    priority
+                    className="w-full h-36 object-cover rounded-xl"
+                  />
+                )}
+              </Link>
               <div className="grid grid-cols-4 items-center text-center pt-3 w-[90%] text-[#64748B]">
                 <div className="flex gap-1 items-center">
                   <FaRegComment />
@@ -83,7 +75,7 @@ export default function FeedItem({
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </FeedItemWrapper>
   );
 }

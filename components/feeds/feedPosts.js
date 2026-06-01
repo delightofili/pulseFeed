@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@/lib/auth";
 import FeedsGrid from "./feeds-grid";
 import { getCachedPosts } from "@/lib/queries";
 

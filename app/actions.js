@@ -17,10 +17,12 @@ import {
   getPostById,
   getUserByEmail,
   likePostDb,
+  sendMessagesDb,
 } from "@/lib/db";
 import { postSchema, registerSchema } from "@/lib/validations";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { pushNotification } from "./api/notifications/stream/route";
 
 export async function createFeed(prevState, formData) {
   const user = await getCurrentUser();
@@ -67,7 +69,15 @@ export async function likePost(formData) {
       userId: post.user_id,
       actorId: user.id,
       type: "like",
-      postId: postId,
+      postId: Number(postId),
+    });
+
+    //push real-time notification to post owner
+
+    pushNotification(post.user_id, {
+      type: "like",
+      actorName: user.name,
+      postId,
     });
   }
 
@@ -203,4 +213,25 @@ export async function logout() {
   await deleteSession();
 
   redirect("/login");
+}
+
+//messages
+
+export async function sendMessages(prevState, formData) {
+  const user = await getCurrentUser();
+  if (!user) return { error: "Not logged in" };
+
+  const receiverId = formData.get("receiverId");
+  const content = formData.get("content");
+
+  if (!content?.trim()) return { error: "Message cannot be empty" };
+
+  sendMessagesDb({
+    senderId: user.id,
+    receiverId: Number(receiverId),
+    content: content.trim(),
+  });
+
+  revalidatePath(`/messages/${receiverId}`);
+  return { success: true };
 }
